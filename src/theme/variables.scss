@@ -38,8 +38,14 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+darkBlue: #00B16A
 );
+
+$tabs-md-background: transparent;
+$menu-md-background:transparent;
+$toolbar-background:#00B16A;
+$toolbar-wp-button-color:#00B16A;
 
 
 // App iOS Variables

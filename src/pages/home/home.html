@@ -1,14 +1,59 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+
+<ion-content fullscreen >
+  <button clear color="darkBlue" style="font-size:25px;" ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+</button>
+
+<div style="padding:0px;padding-right:40px;padding-left:40px; text-align:center;">
+
+
+  <h1 style="padding-top: 10px; color:#00B16A; font-family:'Rockwell'; font-size: 26px;">PEDOMETER</h1>
+
+
+  <!--<ion-list style="background: transparent;" no-lines >-->
+    <!--<ion-item style="text-align:center; background: transparent; padding-left:0px;margin-top: 30px; ">-->
+        <!--<p style="color:#00B16A; padding: 0px; padding-bottom: 2px;" *ngIf="!saved">Go to PROFILE to set a goal (optional)</p>-->
+    <!--</ion-item>-->
+      <!--<ion-item style="text-align:center; background: transparent; padding-left:0px; border: #00B16A 1px solid">-->
+
+        <!--<span style="color:#00B16A;">TIME</span>-->
+
+        <!--<span class="time-text" style="color:#00B16A;">{{timer.hours | number:'1.0-0'}}&nbsp;:-->
+             <!--{{timer.minutes | number:'2.0-0'}}&nbsp;:-->
+             <!--{{timer.seconds | number:'2.0-0'}}-->
+        <!--</span>-->
+
+      <!--</ion-item >-->
+
+      <!--<ion-item style="text-align:center; background: transparent;border: #00B16A 1px solid; padding-left:0px;">-->
+           <!--<span style="color:#00B16A;">-->
+             <!--STEPS-->
+           <!--</span>-->
+            <!--<span class="steps-text" style="color:#00B16A;">{{stepsCount}}</span>-->
+
+      <!--</ion-item>-->
+
+      <!--<ion-item style="text-align:center;background: transparent; border: #00B16A 1px solid; padding-left:0px;">-->
+       <!--<span style="color:#00B16A;">-->
+         <!--CALORIES BURNT-->
+       <!--</span>-->
+
+        <!--<span class="steps-text" style="color:#00B16A;">{{caloriesBurnt}}</span>-->
+        <!--<hr>-->
+      <!--</ion-item>-->
+
+    <!--</ion-list>-->
+  </div>
+  <div style="text-align:center; padding-bottom: 10px; padding-top:15px;">
+      <button (click)="toggleCountSteps()" class="btn-1"  ion-button color="darkBlue" large >{{timerName}}</button>
+      <span style="padding-right:20px; padding-left:20px; ">
+      <button (click)="reset()"  class="btn-1" ion-button color="darkBlue" large> RESET</button>
+      </span>
+      <button (click)="save()" class="btn-1"  ion-button color="darkBlue" large>SAVE </button>
+
+      <p style="color:#00B16A; padding: 10px; padding-bottom: 40px;" [hidden]="paragraphStartPressed">Press START to get started with your walk</p>
+
+  </div>
+
+  </ion-content>

@@ -1,0 +1,65 @@
+
+  
+  
+  <ion-content style=" background-image: url('assets/gray1.jpg')" >
+
+    <button clear color="darkBlue" style="font-size:25px;" ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+  
+  
+      <div style="text-align:center; padding:15px; margin:0px;  padding-right:40px; padding-left:40px;">
+
+    <div style="text-align:center">
+      <h1 style="padding-top: 10px; color:#14568C; font-family:'Rockwell'; font-size: 26px;">PEDOMETER</h1>
+    </div>
+
+    <div style="margin-top:40px;">
+    <ion-item style="text-align:center; background: transparent;  padding-left:0px; border: 1px solid #A9A9A9;">
+        <span style="color:#14568C; font-size:15px;" (click)="setAge()">
+          AGE
+        </span>
+        <br>
+   <span class="steps-text" style="color:#14568C; font-size:25px;" (click)="setAge()">{{age}} </span>
+
+ </ion-item>
+ </div>
+        <ion-item style="text-align:center; background: transparent; padding-left:0px; border: 1px solid #A9A9A9;">
+            <span style="color:#14568C;font-size:15px;" (click)="setHeight()">
+              HEIGHT
+            </span>
+            <br>
+       <span class="steps-text" style="color:#14568C;font-size:25px;" (click)="setHeight()">{{height}} </span>
+   
+     </ion-item>
+
+     <ion-item style="text-align:center; background: transparent; padding-left:0px; border: 1px solid #A9A9A9;">
+        <span style="color:#14568C;font-size:15px" (click)="setWeight()">
+          WEIGHT
+        </span>
+        <br>
+   <span class="steps-text" style="color:#14568C;font-size:25px;" (click)="setWeight()">{{weight}} </span>
+
+ </ion-item>
+
+ <ion-item style="text-align:center; background: transparent; padding-left:0px; border: 1px solid #A9A9A9;">
+    <span style="color:#14568C;font-size:15px" (click)="setWeight()">
+      BODY MASS INDEX (BMI)
+    </span>
+    <br>
+<span class="steps-text" style="color:#14568C;font-size:25px" >{{bmi | number:'1.0-0'}} </span>
+<br>
+<p [hidden]="calculated" [ngStyle]="{'color':color}">{{bmiDescription}}</p>
+
+</ion-item>
+<div style="text-align:center; padding-top:25px;">
+    <button (click)="reset()" ion-button color="darkBlue" large style="padding:0px; margin:0px; font-size:14px; width:100px; height:50px; color:#A9A9A9">RESET</button>
+</div>
+
+  <p style="color:#A9A9A9; padding: 10px;" >Press RESET to reset your profile information</p>
+
+</div>
+
+
+   
+</ion-content>
