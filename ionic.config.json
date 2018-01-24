@@ -1,0 +1,8 @@
+{
+  "name": "StepCounter",
+  "app_id": "4b221524",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
