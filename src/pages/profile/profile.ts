@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ResultProvider } from '../../providers/result/result';
 import { Storage } from '@ionic/storage';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import { SaveProvider } from '../../providers/save/save';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
-
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -21,13 +14,14 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               private alertCtrl:AlertController,
               private rez:ResultProvider,
               private storage:Storage,
               private toastCtrl:ToastController,
               private zacuvaj:SaveProvider,
+              private viewCtrl:ViewController,
               private fs: AndroidFullScreen) {
                 this.fs.isImmersiveModeSupported()
                 .then(() => this.fs.immersiveMode())
@@ -51,13 +45,15 @@ export class ProfilePage {
       this.color=this.zacuvaj.color;
     }
 
-   
-    
+
+
 
   }
-  
+  closeModal(){
+    this.viewCtrl.dismiss();
+  }
   setHeight(){
-  
+
     let alert = this.alertCtrl.create({
       title:'Set Height',
       inputs: [
@@ -104,7 +100,7 @@ export class ProfilePage {
               this.calculated=false;
               this.zacuvaj.calculated=this.calculated;
             }
-            
+
 
           }
         }
@@ -118,7 +114,7 @@ export class ProfilePage {
   }
 
   setWeight(){
-  
+
     let alert = this.alertCtrl.create({
       title:'Set Weight',
       inputs: [
@@ -174,8 +170,8 @@ export class ProfilePage {
               });
               toast.present();
             }
-            
-           
+
+
 
           }
         }
@@ -190,7 +186,7 @@ export class ProfilePage {
 
 
   setAge(){
-  
+
     let alert = this.alertCtrl.create({
       title:'Set Age',
       inputs: [
@@ -261,7 +257,7 @@ bmiDescription;
           this.zacuvaj.color=this.color;
       this.storage.set('bmiDescription',this.bmiDescription);
       this.storage.set('descriptionColor',this.color);
-  
+
     }
     else if(this.bmi>24.9 && this.bmi!=null){
       this.bmiDescription="Overweight";
@@ -270,10 +266,10 @@ bmiDescription;
         this.zacuvaj.color=this.color;
       this.storage.set('bmiDescription',this.bmiDescription);
       this.storage.set('descriptionColor',this.color);
-    
+
     }
-    
-    
+
+
   }
 
   reset(){

@@ -1,21 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>iStep Goalg</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
-<ion-content style=" background-image: url('assets/gray1.jpg')" >
-
-  <button clear color="darkBlue" style="font-size:25px;" ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-</button>
+<ion-content>
 <div style="padding:0px; text-align:center;  padding-right:40px; padding-left:40px;">
-
-
-  <h1 style="padding-top: 10px; color:#14568C; font-family:'Rockwell'; font-size: 26px;">PEDOMETER</h1>
-
-
-
-
 <!--
   <ion-datetime style="color:#14568C;" displayFormat="MMM DD, h:mm A" [(ngModel)]="myDate"></ion-datetime>
 -->
-
   <p style="color:#A9A9A9; padding: 10px;" *ngIf="!setYourGoal">Press on GOAL to set your goal</p>
 
   <ion-item style="text-align:center; background: transparent;border: #A9A9A9 1px solid; padding-left:0px;">
@@ -43,7 +41,7 @@
   </ion-item>
 
   <div style="text-align:center; padding-top:25px;">
-    <button (click)="reset()" ion-button color="darkBlue" large style="padding:0px; margin:0px; font-size:14px; width:100px; height:50px; color:#A9A9A9">RESET</button>
+    <button (click)="reset()" ion-button color="darkBlue" large style="padding:0px; margin:0px; font-size:14px; width:100px; height:50px;">RESET</button>
   </div>
 
   <p style="color:#A9A9A9; padding: 10px;" >Press RESET to reset your daily saved data</p>

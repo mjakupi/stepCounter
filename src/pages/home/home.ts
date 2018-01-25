@@ -1,7 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import {Pedometer, IPedometerData} from "@ionic-native/pedometer";
 import {TimerProvider} from "../../providers/timer/timer";
-import {AlertController, Events, ToastController} from "ionic-angular";
+import {AlertController, Events, IonicPage, ModalController, ToastController} from "ionic-angular";
 import {Subscription} from "rxjs/Subscription";
 import {Storage} from "@ionic/storage";
 import {Vibration} from "@ionic-native/vibration";
@@ -9,11 +9,12 @@ import {ResultProvider} from "../../providers/result/result";
 import { SaveProvider } from '../../providers/save/save';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
   saved=false;
   goalCompleted;
@@ -27,16 +28,23 @@ export class HomePage {
   pedoSubscribe: Subscription;
   getGoal;
   paragraphStartPressed=false;
-
-  constructor(private pedometer: Pedometer, private timerProvider:TimerProvider, private events:Events,
-              private storage: Storage, private alertCtrl:AlertController,private toastCtrl:ToastController,
-              private vibrator: Vibration, private rez:ResultProvider,
-              private zacuvaj: SaveProvider, private fs: AndroidFullScreen
-              ) {
+  visible = false;
+  constructor(private pedometer: Pedometer,
+              private timerProvider:TimerProvider,
+              private events:Events,
+              private modalCtrl:ModalController,
+              private storage: Storage,
+              private alertCtrl:AlertController,
+              private toastCtrl:ToastController,
+              private vibrator: Vibration,
+              private rez:ResultProvider,
+              private zacuvaj: SaveProvider,
+              private fs: AndroidFullScreen
+  ) {
 
     this.fs.isImmersiveModeSupported()
-    .then(() => this.fs.immersiveMode())
-    .catch((error: any) => console.log(error));
+      .then(() => this.fs.immersiveMode())
+      .catch((error: any) => console.log(error));
     this.timer = this.timerProvider.getTimerValue();
 
     this.events.subscribe('secondExpired', (data) => {
@@ -44,14 +52,18 @@ export class HomePage {
     })
 
   }
+  presentResultModal() {
+    let profileModal = this.modalCtrl.create('ResultsPage', { userId: 8675309 });
+    profileModal.present();
+  }
 
   timerStarted=false;
   timerName='START';
-  
+
 
 
   toggleCountSteps() {
-
+    this.visible = !this.visible;
     this.paragraphStartPressed=true;
     this.timerProvider.paragraph=this.paragraphStartPressed
 
@@ -79,33 +91,33 @@ export class HomePage {
             //this.calsBurned=this.caloriesBurnt;
             this.rez.calResults=this.caloriesBurnt;
 
-            
-              if(this.stepsCount==this.getGoal && this.getGoal>0){
-                this.vibrator.vibrate([2000,1000,2000]);
-                let alert = this.alertCtrl.create({
-                  title: "Goal Completed",
-                  buttons: [
-                    {
-                      text: 'OK',
-                      role: 'cancel',
-                      handler: data=>{
+
+            if(this.stepsCount==this.getGoal && this.getGoal>0){
+              this.vibrator.vibrate([2000,1000,2000]);
+              let alert = this.alertCtrl.create({
+                title: "Goal Completed",
+                buttons: [
+                  {
+                    text: 'OK',
+                    role: 'cancel',
+                    handler: data=>{
                       this.vibrator.vibrate(0);
-                      }
-
-
                     }
-                  ]
-                });
-                alert.present();
-              }
-            });
+
+
+                  }
+                ]
+              });
+              alert.present();
+            }
+          });
 
         this.startCount = true;
 
 
       }
     }
-    
+
     else{
       this.timerProvider.stopTimer();
       this.startCount = false;
@@ -114,15 +126,12 @@ export class HomePage {
       this.timerProvider.started=this.timerStarted;
 
     }
-
-
-
   }
 
   save(){
     this.saved=true;
-   this.storage.set('stepsSave', this.stepsCount);
-   this.storage.set('caloriesSave', this.caloriesBurnt);
+    this.storage.set('stepsSave', this.stepsCount);
+    this.storage.set('caloriesSave', this.caloriesBurnt);
     this.rez.setSteps(this.stepsCount);
     this.rez.setCal(this.caloriesBurnt) ;
     this.zacuvaj.steps=this.stepsCount;
@@ -130,7 +139,7 @@ export class HomePage {
     let toast= this.toastCtrl.create({
       message:"You have walked " + this.stepsCount + " steps and burned " + this.caloriesBurnt + " calories",
       duration:5000
-    })
+    });
     toast.present();
   }
 
@@ -156,7 +165,7 @@ export class HomePage {
     this.timerStarted=false;
     this.timerProvider.started=this.timerStarted;
     this.timerName="START";
-   // this.rez.resetSteps();
+    // this.rez.resetSteps();
     this.pedometer.stopPedometerUpdates();
 
   }
@@ -167,48 +176,48 @@ export class HomePage {
 
     this.getGoal=this.rez.goal;
     this.caloriesBurnt=this.rez.calResults;
-     this.stepsCount=this.rez.stepsResults;
-     this.timerStarted=this.timerProvider.started;
-     this.started=this.timerProvider.startedCountingSteps;
-     this.paragraphStartPressed=this.timerProvider.paragraph;
-     if(!this.timerStarted){
+    this.stepsCount=this.rez.stepsResults;
+    this.timerStarted=this.timerProvider.started;
+    this.started=this.timerProvider.startedCountingSteps;
+    this.paragraphStartPressed=this.timerProvider.paragraph;
+    if(!this.timerStarted){
       this.timerName="START";
     }
     else{
       this.timerName="STOP";
       //OVDE DODADOV ZA PEDOMETAR DA PRODOLZIT 1!!!1!!!!!
-     this.pedometer.startPedometerUpdates()
-          .subscribe((data: IPedometerData) => {
-            this.stepsCount = data.numberOfSteps;
-            this.rez.stepsResults= this.stepsCount;
-            //this.stepsWalked=this.stepsCount;
-            this.caloriesBurnt =  Math.floor(this.stepsCount / 20); //  20 steps burn 1 Calorie.
-            //this.calsBurned=this.caloriesBurnt;
-            this.rez.calResults=this.caloriesBurnt;
-
-            
-              if(this.stepsCount==this.getGoal && this.getGoal>0){
-               this.vibrator.vibrate([2000,1000,2000])
-                let alert = this.alertCtrl.create({
-                  title: "Goal Completed",
-                  buttons: [
-                    {
-                      text: 'OK',
-                      role: 'cancel',
-                      handler: data=>{
-                      this.vibrator.vibrate(0);
-                      }
+      this.pedometer.startPedometerUpdates()
+        .subscribe((data: IPedometerData) => {
+          this.stepsCount = data.numberOfSteps;
+          this.rez.stepsResults= this.stepsCount;
+          //this.stepsWalked=this.stepsCount;
+          this.caloriesBurnt =  Math.floor(this.stepsCount / 20); //  20 steps burn 1 Calorie.
+          //this.calsBurned=this.caloriesBurnt;
+          this.rez.calResults=this.caloriesBurnt;
 
 
-                    }
-                  ]
-                });
-                alert.present();
-              }
+          if(this.stepsCount==this.getGoal && this.getGoal>0){
+            this.vibrator.vibrate([2000,1000,2000])
+            let alert = this.alertCtrl.create({
+              title: "Goal Completed",
+              buttons: [
+                {
+                  text: 'OK',
+                  role: 'cancel',
+                  handler: data=>{
+                    this.vibrator.vibrate(0);
+                  }
+
+
+                }
+              ]
             });
+            alert.present();
+          }
+        });
 
     }
 
-   
+
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {ResultProvider} from "../../providers/result/result";
 import { SaveProvider } from '../../providers/save/save';
@@ -26,7 +26,7 @@ export class ResultsPage {
   setYourGoal=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage:Storage,
-              private alertCtrl:AlertController, private toastCtrl:ToastController, 
+              private alertCtrl:AlertController, private toastCtrl:ToastController,private viewCtrl:ViewController,
               private rez: ResultProvider, private zacuvaj: SaveProvider, private fs: AndroidFullScreen) {
 
                 this.fs.isImmersiveModeSupported()
@@ -35,7 +35,9 @@ export class ResultsPage {
 
 
   }
-
+  closeModal(){
+    this.viewCtrl.dismiss();
+  }
   ionViewDidLoad() {
     console.log('PROFILEEEE');
 
@@ -103,7 +105,7 @@ export class ResultsPage {
     this.storage.set('goal',0);
     this.storage.set('stepsSave',0);
     this.storage.set('caloriesSave',0);
-  
+
 
   }
 }
