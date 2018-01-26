@@ -39,8 +39,6 @@ export class ResultsPage {
     this.viewCtrl.dismiss();
   }
   ionViewDidLoad() {
-    console.log('PROFILEEEE');
-
     this.steps= this.zacuvaj.steps;
     this.storage.set('stepsSave',this.steps);
     this.calories=this.zacuvaj.calories;
@@ -52,6 +50,7 @@ export class ResultsPage {
   setGoal(){
     this.setYourGoal=true;
     let alert = this.alertCtrl.create({
+      title:'Set Goal',
       inputs: [
         {
           placeholder: 'Set Goal'

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>iStep Goalg</ion-title>
+    <ion-title>iStep Goal</ion-title>
     <ion-buttons end>
       <button ion-button icon-only small (click)="closeModal()">
         <ion-icon name="close"></ion-icon>
@@ -10,40 +10,81 @@
 </ion-header>
 
 <ion-content>
-<div style="padding:0px; text-align:center;  padding-right:40px; padding-left:40px;">
-<!--
-  <ion-datetime style="color:#14568C;" displayFormat="MMM DD, h:mm A" [(ngModel)]="myDate"></ion-datetime>
--->
-  <p style="color:#A9A9A9; padding: 10px;" *ngIf="!setYourGoal">Press on GOAL to set your goal</p>
+    <h5 text-center style="color:#A9A9A9;" *ngIf="!setYourGoal">Press on GOAL to set your goal</h5>
 
-  <ion-item style="text-align:center; background: transparent;border: #A9A9A9 1px solid; padding-left:0px;">
-         <span style="color:#14568C;" (click)="setGoal()">
-           GOAL
-         </span>
-    <span class="steps-text" style="color:#14568C;" (click)="setGoal()">{{goal}} </span>
+    <ion-card>
+      <ion-card-header text-center (click)="setGoal()">
+        Set Goal
+      </ion-card-header>
+      <hr>
+      <ion-card-content text-center >
+        Your Goal is: {{goal}}
+      </ion-card-content>
+    </ion-card>
 
-  </ion-item>
+    <ion-card>
+      <ion-card-header text-center>
+        STEPS
+      </ion-card-header>
+      <ion-card-content text-center>
+        {{steps}}
+      </ion-card-content>
+    </ion-card>
 
+    <ion-card>
+      <ion-card-header text-center>
+        CALORIES BURNT
+      </ion-card-header>
 
-  <ion-item style="text-align:center; background: transparent;border: #A9A9A9 1px solid; padding-left:0px;">
-         <span style="color:#14568C;">
-           STEPS
-         </span>
-    <span class="steps-text" style="color:#14568C;">{{steps}}</span>
-
-  </ion-item>
-
-  <ion-item style="text-align:center;background: transparent; border: #A9A9A9 1px solid; padding-left:0px;">
-     <span style="color:#14568C;">
-       CALORIES BURNT
-     </span>
-    <span class="steps-text" style="color:#14568C;">{{calories}}</span>
-  </ion-item>
-
-  <div style="text-align:center; padding-top:25px;">
-    <button (click)="reset()" ion-button color="darkBlue" large style="padding:0px; margin:0px; font-size:14px; width:100px; height:50px;">RESET</button>
-  </div>
-
-  <p style="color:#A9A9A9; padding: 10px;" >Press RESET to reset your daily saved data</p>
-</div>
+      <ion-card-content text-center>
+        {{calories}}
+      </ion-card-content>
+    </ion-card>
+  <ion-footer>
+    <ion-grid>
+      <ion-row no-padding no-margin>
+        <ion-col col-12 no-padding>
+          <button ion-button full (click)="reset()" block>Reset</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>
 </ion-content>
+
+
+  <!--<div style="padding:0px; text-align:center;  padding-right:40px; padding-left:40px;">-->
+<!--&lt;!&ndash;-->
+  <!--<ion-datetime style="color:#14568C;" displayFormat="MMM DD, h:mm A" [(ngModel)]="myDate"></ion-datetime>-->
+<!--&ndash;&gt;-->
+  <!---->
+  <!--<ion-item style="text-align:center; background: transparent;border: #A9A9A9 1px solid; padding-left:0px;">-->
+         <!--<span style="color:#14568C;" (click)="setGoal()">-->
+           <!--GOAL-->
+         <!--</span>-->
+    <!--<span class="steps-text" style="color:#14568C;" (click)="setGoal()">{{goal}} </span>-->
+
+  <!--</ion-item>-->
+
+
+  <!--<ion-item style="text-align:center; background: transparent;border: #A9A9A9 1px solid; padding-left:0px;">-->
+         <!--<span style="color:#14568C;">-->
+           <!--STEPS-->
+         <!--</span>-->
+    <!--<span class="steps-text" style="color:#14568C;">{{steps}}</span>-->
+
+  <!--</ion-item>-->
+
+  <!--<ion-item style="text-align:center;background: transparent; border: #A9A9A9 1px solid; padding-left:0px;">-->
+     <!--<span style="color:#14568C;">-->
+       <!--CALORIES BURNT-->
+     <!--</span>-->
+    <!--<span class="steps-text" style="color:#14568C;">{{calories}}</span>-->
+  <!--</ion-item>-->
+
+  <!--<div style="text-align:center; padding-top:25px;">-->
+    <!--<button (click)="reset()" ion-button color="darkBlue" large style="padding:0px; margin:0px; font-size:14px; width:100px; height:50px;">RESET</button>-->
+  <!--</div>-->
+
+  <!--<p style="color:#A9A9A9; padding: 10px;" >Press RESET to reset your daily saved data</p>-->
+<!--</div>-->
+

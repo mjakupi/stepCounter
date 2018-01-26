@@ -15,55 +15,53 @@
 <ion-content fullscreen >
   <ion-card>
     <ion-card-header>
-      <span style="color:#00B16A;"> TIME</span>
+      <span> TIME</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">
-
       {{timer.hours | number:'1.0-0'}}&nbsp;:
       {{timer.minutes | number:'2.0-0'}}&nbsp;:
       {{timer.seconds | number:'2.0-0'}}
     </ion-card-content>
-
-    <button text-center ion-button icon-left clear medium color="primary" (click)="toggleCountSteps()" item-right *ngIf="!timer.hasStarted">
-      <ion-icon name="play" *ngIf="!visible"></ion-icon>
-      <ion-icon name="pause" color="danger" *ngIf="visible"></ion-icon>
-      {{timerName}}
-    </button>
-
+    <div style="padding-left: 25px;">
+      <button text-center ion-button icon-left clear  color="primary" (click)="toggleCountSteps()" *ngIf="!timer.hasStarted">
+        <ion-icon name="play" *ngIf="!visible"></ion-icon>
+        <ion-icon name="pause" color="danger" *ngIf="visible"></ion-icon>
+        {{timerName}}
+      </button>
+      <button text-center ion-button icon-left clear  color="primary" (click)="reset()">
+        <ion-icon name="refresh"></ion-icon>
+        RESET
+      </button>
+      <button text-center ion-button icon-left clear  color="primary" (click)="save()">
+        SAVE
+      </button>
+    </div>
   </ion-card>
+
   <ion-card>
     <ion-card-header>
-      <span style="color:#00B16A;"> STEPS</span>
+      <span > STEPS</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">
       {{stepsCount}}
     </ion-card-content>
   </ion-card>
+
   <ion-card>
     <ion-card-header>
-      <span style="color:#00B16A;">   CALORIES BURNT</span>
+      <span> CALORIES BURNT</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">
       {{caloriesBurnt}}
     </ion-card-content>
   </ion-card>
 
-  <div style="padding:0px;padding-right:40px;padding-left:40px; text-align:center;">
-    <ion-list style="background: transparent;" no-lines >
-      <ion-item style="text-align:center; background: transparent; padding-left:0px;margin-top: 30px; ">
-        <p style="color:#00B16A; padding: 0px; padding-bottom: 2px;" *ngIf="!saved">Go to PROFILE to set a goal (optional)</p>
-      </ion-item>
-    </ion-list>
-  </div>
-  <div style="text-align:center; padding-bottom: 10px; padding-top:15px;">
-
-    <span style="padding-right:20px; padding-left:20px; ">
-      <button (click)="reset()"  class="btn-1" ion-button color="darkBlue" large> RESET</button>
-      </span>
-    <button (click)="save()" class="btn-1"  ion-button color="darkBlue" large>SAVE </button>
-
-    <p style="color:#00B16A; padding: 10px; padding-bottom: 40px;" [hidden]="paragraphStartPressed">Press START to get started with your walk</p>
-
-  </div>
+  <!--<div style="padding:0px;padding-right:40px;padding-left:40px; text-align:center;">-->
+    <!--<ion-list style="background: transparent;" no-lines >-->
+      <!--<ion-item style="text-align:center; background: transparent; padding-left:0px;margin-top: 30px; ">-->
+        <!--<p style=" padding: 0px; padding-bottom: 2px;" *ngIf="!saved">Go to PROFILE to set a goal (optional)</p>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+  <!--</div>-->
 
 </ion-content>
