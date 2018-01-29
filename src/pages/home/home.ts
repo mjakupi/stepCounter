@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Pedometer, IPedometerData} from "@ionic-native/pedometer";
 import {TimerProvider} from "../../providers/timer/timer";
-import {AlertController, Events, IonicPage, ModalController, ToastController} from "ionic-angular";
+import {AlertController, Events, IonicPage, ToastController} from "ionic-angular";
 import {Subscription} from "rxjs/Subscription";
 import {Storage} from "@ionic/storage";
 import {Vibration} from "@ionic-native/vibration";
@@ -17,6 +17,8 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 export class HomePage {
   saved=false;
+  setYourGoal=false;
+  goal=0;
   goalCompleted;
   stepsWalked=0;
   calsBurned=0;
@@ -32,7 +34,6 @@ export class HomePage {
   constructor(private pedometer: Pedometer,
               private timerProvider:TimerProvider,
               private events:Events,
-              private modalCtrl:ModalController,
               private storage: Storage,
               private alertCtrl:AlertController,
               private toastCtrl:ToastController,
@@ -52,10 +53,10 @@ export class HomePage {
     })
 
   }
-  presentResultModal() {
-    let profileModal = this.modalCtrl.create('ResultsPage', { userId: 8675309 });
-    profileModal.present();
-  }
+  // presentResultModal() {
+  //   let profileModal = this.modalCtrl.create('ResultsPage', { userId: 8675309 });
+  //   profileModal.present();
+  // }
 
   timerStarted=false;
   timerName='START';
@@ -65,7 +66,7 @@ export class HomePage {
   toggleCountSteps() {
     this.visible = !this.visible;
     this.paragraphStartPressed=true;
-    this.timerProvider.paragraph=this.paragraphStartPressed
+    this.timerProvider.paragraph=this.paragraphStartPressed;
 
     if(!this.timerStarted){
 
@@ -152,6 +153,52 @@ export class HomePage {
 
   }
 
+  setGoal(){
+    this.setYourGoal=true;
+    let alert = this.alertCtrl.create({
+      title:'Set Goal',
+      inputs: [
+        {
+          placeholder: 'Set Goal'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+
+        {
+          text: 'Save',
+
+          handler: data => {
+            //statusalert.setTitle('Updated');
+            if(data[0]!=0 || data[0]!=null || this.goal!=0){
+              this.goal = data[0];
+              this.rez.goal=this.goal;
+              this.storage.set('goal',this.goal);
+            }
+            else{
+              let toat= this.toastCtrl.create({
+                message:"Set a goal larger than 0",
+                duration:5000
+              });
+              toat.present();
+            }
+
+          }
+        }
+      ]
+
+    });
+
+    alert.present();
+
+
+  }
 
   reset(){
 

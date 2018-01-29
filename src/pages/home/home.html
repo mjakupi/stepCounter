@@ -4,18 +4,24 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>iStep</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only small (click)="presentResultModal()">
-        <ion-icon name="trophy"></ion-icon>StepGoal
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content fullscreen >
+<ion-content fullscreen>
+  <h5 text-center style="color:#A9A9A9;" *ngIf="!setYourGoal">Press on GOAL to set your goal</h5>
+  <ion-card>
+    <ion-card-header text-center (click)="setGoal()">
+      Set Goal
+    </ion-card-header>
+    <hr>
+    <ion-card-content text-center >
+      Your Goal is: {{goal}}
+    </ion-card-content>
+  </ion-card>
+
   <ion-card>
     <ion-card-header>
-      <span> TIME</span>
+      <span>TIME</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">
       {{timer.hours | number:'1.0-0'}}&nbsp;:
@@ -55,13 +61,5 @@
       {{caloriesBurnt}}
     </ion-card-content>
   </ion-card>
-
-  <!--<div style="padding:0px;padding-right:40px;padding-left:40px; text-align:center;">-->
-    <!--<ion-list style="background: transparent;" no-lines >-->
-      <!--<ion-item style="text-align:center; background: transparent; padding-left:0px;margin-top: 30px; ">-->
-        <!--<p style=" padding: 0px; padding-bottom: 2px;" *ngIf="!saved">Go to PROFILE to set a goal (optional)</p>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-  <!--</div>-->
 
 </ion-content>

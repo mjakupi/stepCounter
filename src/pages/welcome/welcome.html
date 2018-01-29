@@ -1,21 +1,26 @@
 <ion-header no-shadow>
   <ion-navbar>
     <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">Skip</button>
+      <button ion-button (click)="startApp()" color="light">Skip</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce>
   <ion-slides  (ionWillChange)="onSlideChangeStart($event)">
-    <ion-slide *ngFor="let slide of slides">
-      <img [src]="slide.image" class="slide-image"/>
-      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-      <p [innerHTML]="slide.description"></p>
+    <ion-slide >
+      <img src="assets/logo.png" class="slide-image"/>
+      <h2 class="slide-title">Welcome to the StepCounter</h2>
+      <p>The <b>Made with Ionic</b> is a fully-featured Ionic app with pedometer plugin for counting steps.</p>
+    </ion-slide>
+    <ion-slide >
+      <img src="assets/instructions.svg" class="slide-image"/>
+      <h2 class="slide-title">How to use StepCounter </h2>
+      <p>The <b>Ionic StepCounter </b> is a fully-featured app that counts.</p>
     </ion-slide>
     <ion-slide>
       <img src="assets/ready.svg" class="slide-image"/>
-      <h2 class="slide-title">Ready to start lose weight ?</h2>
+      <h2 class="slide-title">Ready to start count your steps?</h2>
       <button ion-button icon-right  color="light" large clear (click)="startApp()">
         Continue
         <ion-icon name="arrow-forward"></ion-icon>
