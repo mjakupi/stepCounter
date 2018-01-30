@@ -10,13 +10,14 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, public menu: MenuController,  public platform: Platform) {}
 
   startApp() {
-    var userLoggedIn = window.localStorage.getItem('userLoggedIn');
-
-    if(userLoggedIn == '1'){
+    // ova ja dodadov ovde mislam deka rabotit xD
+    var introShown = window.localStorage.getItem('slidesShown');
+    if(introShown == '1'){
       this.navCtrl.setRoot('HomePage');
-    }else{
-      window.localStorage.setItem('slidesShown','1');
-      this.navCtrl.setRoot('HomePage');
+    }
+    else{
+        window.localStorage.setItem('slidesShown','1');
+        this.navCtrl.setRoot('HomePage');
     }
   }
 

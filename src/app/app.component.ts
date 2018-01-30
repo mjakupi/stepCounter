@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'WelcomePage';
+  rootPage: any ;
 
   pages: Array<{title: string, component: any}>;
 
@@ -20,14 +20,11 @@ export class MyApp {
     var introShown = window.localStorage.getItem('slidesShown');
 
     if(introShown == '1'){
-
-      // check if the user is logged in
-      var isLoggedIn = window.localStorage.getItem('userLoggedIn');
-      if(isLoggedIn == '1'){
+      // checks introshown
         this.rootPage = 'HomePage';
       }else{
         this.rootPage = 'WelcomePage';
-      }
+
     }
     // used for an example of ngFor and navigation
     this.pages = [
