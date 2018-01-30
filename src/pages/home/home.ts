@@ -75,24 +75,15 @@ export class HomePage {
       this.timerProvider.started=this.timerStarted;
 
       if(this.startCount == false) {
-        //ovdedodaov || uslov
-
         console.log("Counting steps");
-
         this.started=true;
         this.timerProvider.startTimer();
-
-
         this.pedoSubscribe=this.pedometer.startPedometerUpdates()
           .subscribe((data: IPedometerData) => {
             this.stepsCount = data.numberOfSteps;
             this.rez.stepsResults= this.stepsCount;
-            //this.stepsWalked=this.stepsCount;
             this.caloriesBurnt =  Math.floor(this.stepsCount / 20); //  20 steps burn 1 Calorie.
-            //this.calsBurned=this.caloriesBurnt;
             this.rez.calResults=this.caloriesBurnt;
-
-
             if(this.stepsCount==this.getGoal && this.getGoal>0){
               this.vibrator.vibrate([2000,1000,2000]);
               let alert = this.alertCtrl.create({
@@ -159,6 +150,7 @@ export class HomePage {
       title:'Set Goal',
       inputs: [
         {
+          number: 'Set Goal',
           placeholder: 'Set Goal'
         }
       ],
@@ -244,7 +236,7 @@ export class HomePage {
 
 
           if(this.stepsCount==this.getGoal && this.getGoal>0){
-            this.vibrator.vibrate([2000,1000,2000])
+            this.vibrator.vibrate([2000,1000,2000]);
             let alert = this.alertCtrl.create({
               title: "Goal Completed",
               buttons: [
