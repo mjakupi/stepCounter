@@ -7,8 +7,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <h5 text-center style="color:#A9A9A9;" *ngIf="!setYourGoal">Press on GOAL to set your goal</h5>
+<ion-content class="green-bg">
+  <h5 text-center class="text-white" *ngIf="!setYourGoal">Press on GOAL to set your goal</h5>
   <ion-card>
     <ion-card-header text-center (click)="setGoal()">
       Set Goal
@@ -20,7 +20,7 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header>
+    <ion-card-header text-center>
       <span>TIME</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">
@@ -29,24 +29,24 @@
       {{timer.seconds | number:'2.0-0'}}
     </ion-card-content>
     <div style="padding-left: 25px;">
-      <button text-center ion-button icon-left clear  color="primary" (click)="toggleCountSteps()" *ngIf="!timer.hasStarted">
+      <button text-center ion-button icon-left clear  color="secondary" (click)="toggleCountSteps()" *ngIf="!timer.hasStarted">
         <ion-icon name="play" *ngIf="!visible"></ion-icon>
         <ion-icon name="pause" color="danger" *ngIf="visible"></ion-icon>
         {{timerName}}
       </button>
-      <button text-center ion-button icon-left clear  color="primary" (click)="reset()">
+      <button text-center ion-button icon-left clear  color="secondary" (click)="reset()">
         <ion-icon name="refresh"></ion-icon>
         RESET
       </button>
-      <button text-center ion-button icon-left clear  color="primary" (click)="save()">
+      <button text-center ion-button icon-left clear  color="secondary" (click)="save()">
         SAVE
       </button>
     </div>
   </ion-card>
 
   <ion-card>
-    <ion-card-header>
-      <span > STEPS</span>
+    <ion-card-header text-center>
+      <span> STEPS</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">
       {{stepsCount}}
@@ -54,7 +54,7 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header>
+    <ion-card-header text-center>
       <span> CALORIES BURNT</span>
     </ion-card-header>
     <ion-card-content text-center style=" font-size: 3rem !important;">

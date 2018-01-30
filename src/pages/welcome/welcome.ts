@@ -10,10 +10,14 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, public menu: MenuController,  public platform: Platform) {}
 
   startApp() {
-    this.navCtrl.setRoot('HomePage', {}, {
-      animate: true,
-      direction: 'forward'
-    });
+    var userLoggedIn = window.localStorage.getItem('userLoggedIn');
+
+    if(userLoggedIn == '1'){
+      this.navCtrl.setRoot('HomePage');
+    }else{
+      window.localStorage.setItem('slidesShown','1');
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
   onSlideChangeStart(slider) {

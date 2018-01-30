@@ -150,7 +150,7 @@ export class HomePage {
       title:'Set Goal',
       inputs: [
         {
-          number: 'Set Goal',
+          type: 'number',
           placeholder: 'Set Goal'
         }
       ],

@@ -17,6 +17,18 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
+    var introShown = window.localStorage.getItem('slidesShown');
+
+    if(introShown == '1'){
+
+      // check if the user is logged in
+      var isLoggedIn = window.localStorage.getItem('userLoggedIn');
+      if(isLoggedIn == '1'){
+        this.rootPage = 'HomePage';
+      }else{
+        this.rootPage = 'WelcomePage';
+      }
+    }
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'HomePage' },
